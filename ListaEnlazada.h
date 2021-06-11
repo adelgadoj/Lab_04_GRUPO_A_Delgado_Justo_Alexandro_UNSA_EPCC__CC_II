@@ -37,11 +37,11 @@ void ListaEnlazada::insert(int _dato){
     }
     else{
         Nodo *aux=head;
-        while(aux->getNext() != nullptr && aux->getNext()->getDato() < nuevo_nodo->getDato()){
+        while(aux->getNext() != nullptr && aux->getNext()->getDato() < nuevo_nodo->getDato()){ //MEDIO
             aux = aux->getNext();
 
         }
-        nuevo_nodo->setNext(aux->getNext());
+        nuevo_nodo->setNext(aux->getNext()); //Intercambio
         aux->setNext(nuevo_nodo);
 
     }
@@ -67,11 +67,13 @@ void ListaEnlazada::remove(int pos){
     else{
             if( pos == size){
                 Nodo *aux=head;
-                while(aux->getNext()->getNext() != nullptr){ //ultimo
-                    delete aux->getNext();
-                    aux->setNext(nullptr);
-
+                int cont=0;
+                while(cont != pos-2){
+                    aux=aux->getNext();
+                    cont++;
                 }
+                delete aux->getNext();
+                aux->setNext(nullptr);
             }
             else if( pos == 1){
                 Nodo *aux=head;
@@ -80,7 +82,6 @@ void ListaEnlazada::remove(int pos){
             }
             else{
                 Nodo *aux=head;
-
                 int cont=0;
                 while( pos - 2 != cont ){
                     aux = aux->getNext();
